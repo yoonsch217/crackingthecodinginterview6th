@@ -1,0 +1,4 @@
+3: Don't need to make a temporary node. 
+
+
+6: implementing recursive function.. need to study again
