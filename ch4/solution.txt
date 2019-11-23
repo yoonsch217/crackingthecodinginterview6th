@@ -1,0 +1,153 @@
+1. Route Between Nodes
+Do BFS.
+Make a queue and insert the current node.
+And until the queue becomes empty, pop front and look its neighbors and if any of them hasn't been visited, push it into the queue and mark it as visited.
+When this algorithm reaches the target node, return true.
+Or, if this algorithm reaches an empty queue, return false.
+
+Tradeoff between BFS and DFS?
+DFS is easy to implement because we just need one recursion.
+BFS is good at finding the shortest path, whereas DFS has to search deep inside even though the target node is a neighbor.
+
+
+
+2. Minimal Tree
+What is binary search tree?
+It is a binary tree where for a certain node, all the nodes that have less value compared to the certain node are placed in the left subtree, and the others placed in the right subtree.
+Therefore, to make a minimal height, the root node should have the median value.
+And for the left and right children, the left child should have the median value among the remained left array.
+
+
+
+3. List of Depths
+We can use BFS.
+We need a variable 'count' for counting the number of nodes for a certain level of tree.
+For 'count' times, dequeue a node and enqueue its children and increase 'count' for each enqueue.
+Doing this, make a linked list, and when we've done 'count' of times, go to the next level.
+Or instead of defining a count variable, we can just make two queues for the current level and the next level.
+
+There is also a way to use DFS.
+Doing preorder traversal, we can pass the current level.
+
+
+
+/////////////////
+4. Check Balanced
+cf) Getting height of a node.
+```
+int getHeight(Node* n){
+	if(n == nullptr) return -1;
+	return max(getHeight(n->left), getHeight(n->right))+1;
+}
+```
+A brute-force method is just doing the above function for every node.
+But this is inefficient, and we can find out that actually the above function can check whether the tree is balacned or not.
+Before returning a value, check the difference between getHeight(left) and getHeight(right).
+If it differs in height by more than 2, return an error value.
+
+
+
+5.Validate BST
+If a binary tree is a BST, during in-order traveral, the visited value should not be less than the former one.
+But using in-order traversal can have some problems when there are some duplicate values.
+
+Second solution is passing min and max values when going down to a child node.
+When it goes down to the left node, max value is updated.
+There are up to O(lg N) recursive calls since we may recurse up to the depth of the tree.
+
+
+
+6. Succesor
+If the node has a right child, move on to the right child and return the left most child.
+Else if the node is a left child of its parent node, return its parent.
+Else if the node is a right child of its parent ndoe, go upwards until a certain node is a left child of its parent. Then return its parent.
+If nothing, return null.
+
+
+
+7. Build Order
+Make a map that has a node as a key, and a list of nodes that are dependent to the key node as a value.
+And while making that map, make another map2 that has a node as a key, and the number of nodes to be done before the key node as a value.
+After making the two maps, search the map2 and find nodes that have 0 as a value, which means those nodes are not dependent to any other nodes.
+And while the queue isn't empty, pop one and search the node in the map1, and for the nodes in value list, subtract the value in map2.
+And if any node has 0 as its value, enqueue it.
+After finishing the iteration, if there's any remainder, return false.
+
+Or we can use DFS.
+
+
+
+///////////////////////
+8. First Common Ancestor
+The first thing that comes to my mind is, if each node as its parent's address, find the level of the two nodes, and for the deeper node, go upward by the difference, and for the both nodes, go upwards one by one, and return when they meet.
+Or make a cover(node a, node b) function and check whether either of the two covers the other.
+If not, for a node a, go upwards one by one while doing the checker function.
+
+What if there's no link to parent nodes?
+We can know that for a certain node, if the two target nodes are in the left subtree, the first common ancestor is also in the left subtree, so we can go to the left child.
+When the two target nodes are in the different subtree for the first time, it should be the first common ancestor.
+We also need cover function here.
+
+There's an optimized solution... I skipped...
+
+
+
+//////I'm just gonna read solution. Lack of time :(
+9. BST Sequence
+The first element should be the root value.
+And for the next element, either of the two child nodes can come, so this makes an additional branch.
+So in the last step, we can just offer the case when left child comes first, and the case when the right child comes first.
+Therefore, we recursively 
+
+////////...............
+
+
+
+
+
+10. Check Subtree
+If two trees have the same preorder traversal, they are identical trees in values and structure.
+Therefore, preorder traverse for the two trees, and if the array of the smaller one is a subarray of the one of the bigger one, returns true.
+This takes O(n+m) time and O(n+m) space.
+
+Another approach is to search through the larger tree, and if any node has the same value of the value of the root of the smaller tree, compare the two if they are identical.
+When k is the number of occrences of T2's root in T1, the runtime is O(n+km). Worst case O(nm).
+This takes O(lgn + lgm) memory.
+
+
+
+
+
+11. Random Node
+Straightforward way is to make an array that contains all the elements in the tree, and return random element.
+This takes O(n) time and O(n) space.
+And there's also an issue when insertion and deletion happens.
+We should update the array.
+
+A better approach is to return the current node with a probability of 1/n.
+And with a probability of LeftSize/n, go to the left child.
+Therefore, when building our tree, we should store the size of each subtree in a node.
+
+
+
+
+12. Paths with Sum
+Brute force approach is for every node, go downwards until the sum becomes the target sum.
+Runtime is O(NlgN) in a balanced tree. For unbalanced tree, O(N^2)
+
+Optimized:
+We need a hash table that contains running sum so far.
+From the starting node, as it go downwards, calculate the sum so far, and insert it in the hash table.
+As we visit each node:
+Look up runningSum - targetSum in the hashtable. If there's a value in the hashtable, that's a path.
+If runningSum == targetSum, it's also a path from the root.
+Recurse left and right.
+After we're done recursing left and right, decrement the value of runningSum in the hashtable.
+
+
+
+
+
+
+
+

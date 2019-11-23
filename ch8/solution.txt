@@ -1,0 +1,93 @@
+1. Triple Step
+There are n stairs.
+For the n-th stair, there are three possible ways.
+One step, two step, three steps.
+a(n) = a(n-1)+a(n-2)+a(n-3)
+a(1) = 1
+a(2) = 2
+a(3) = 4
+and so on.
+
+
+
+2. Robot in a Grid
+We have a r by c matrix.
+Start point is m[0][0].
+To get to (r,c), we need to find a path to (r-1,c) or (r, c-1).
+
+vector<pair<int, int>> findRoute(vector<vector<int>> m, vector<pair<int, int>> offlimit){
+	bool isFound = false;
+	vector<pair<int,int>> route;
+	set<pair<int,int>> failed;
+	if(helper(m.size()-1, m[0].size()-1)) return route;
+	return null;
+}
+
+bool helper(vector<vector<int>> m, vector<pair<int,int>> offlimits, vector<pair<int, int>>& route, int r, int c, set<pair<int,int>>& failed){
+	if(r >= m.size() || c >= m[0].size()) return false;
+
+	pair<int,int> current = makepair(r, c);
+	if(failed.find(current)) return false;
+
+	if(isOrigin || helper(r-1,c) || helper(r, c-1)){
+		route.push_back(current);
+		return true;
+	}
+
+	failed.insert(current);
+	return false;
+}
+
+
+
+3. Magic Index
+Because this array is sorted, we can apply binary search method.
+Go to the middle, and compare the index and the value.
+If the value is greater than the index, search in the left side, and search in the right side otherwise.
+
+Followup: If the elements are not distinct.
+Even though A[5] = 3, we can not conclude that the magic index is in the right side.
+We should also search from the start to A[3], because A[4] must have a value less than or equal to 3.
+And we should search the right side also.
+If A[5] = 7, we should search the left side, and also the right side from 7 to the end.
+
+
+
+4. Power Set
+For each element, there are two options, one for adding the element into the list, and the other for just skipping that element.
+Therefore we get 2^n results.
+Time and space complexity are both n*2^n.
+
+
+
+5. Recursive Multiply
+int mul_main(int a, int b){
+	return multiply(max(a,b), min(a,b));
+}
+int multiply(int a, int b){
+	if(b == 0) return 0;
+	return a+multiply(a, b-1);
+}
+
+Optimized:
+Using bit manipulation, divide b by 2.
+So, the temporary result would be mul(a, b>>1) + mul(a, b>>1)
+And if b is an odd number, add a, and return.
+Time: O(log b)
+
+
+
+6. Towers of Hanoi
+n=1:
+Simply move disk1 from origin to destination.
+n=2:
+Move disk1~1(disk1) to buffer. Move disk n(disk2) to destination. Move disk1~1(disk1) to destination.
+n=3:
+Move disk1~2(disk1, disk2) to buffer. Move disk n(disk3) to destination. Move disk1~2 to destination.
+
+moveDisks(int n, Tower origin, Tower destination, Tower buffer){
+	if(n == 0) return;
+	moveDisks(n-1, origin, buffer, destination);
+	moveTop(origin, destination);
+	moveDisks(n-1, buffer, destination, buffer);
+}

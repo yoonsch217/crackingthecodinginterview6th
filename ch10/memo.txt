@@ -1,0 +1,15 @@
+2번 다 안끝냄.
+
+
+6.
+사이즈가 매우 큼 -> divide and conquer
+각 chunk를 sort한 뒤 merge하면 된다는데. external sort?
+external sort:
+data bigger than main memory.
+external disk memory는 제한을 두지 않는다는 전제.
+만약 900MB의 데이터가 있고 100MB의 램이 있다.
+그러면 9개의 chunk로 나눠서 각각을 sort한다.
+그 다음에 각각의 chunk에서 작은 10MB씩 갖고오면 총 90MB의 데이터.
+거기에 10MB의 output buffer를 확보해놓는다.
+그 9개의 chunk중에서 제일 작은것들만 10MB어치 뽑아서 output buffer에 넣고 10MB 뽑히면 disk에 쓴다.
+각 chunk중에서 다 떨어지면 그 해당하는 곳에서 또 10MB 데이터 갖고온다.

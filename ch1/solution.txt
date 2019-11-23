@@ -1,0 +1,92 @@
+1. Is Unique
+1) 
+Make an array which has enough size to contain all types of characters, and initialize it by 0.
+Scanning the characters, check whether the index has different value than 0, and if not,
+update the element which denotes the character by 1.
+
+2)
+Sort the string in place, and scan in linear time.
+This takes O(1) space.
+
+
+
+2. Check Permutation
+1)
+Similarly to Q1, make two arrays, one for the first string, and the other for the other string, and update the array.
+After finishing the update, check whether the arrays are the same.
+
+2)
+Sort string, and compare.
+
+
+
+3. URLify
+Make the string to an array of characters.
+Scanning the array until the given length, count the number of spaces and determine the output length.
+Scanning from the end of the string, move it to the end of the array, and if there is a space, insert the given characters.
+
+
+
+4. Palindrome Permutation
+1)
+Just make an array which contains the counts of each character, 
+and by scanning the array, check whether all the elements except for an element has even numbers, and the one has an odd number.
+Or, we can use map instead.
+
+2)
+Sort the string, and make a boolean.
+Scanning, if the number of same character becomes odd, and the next character is different, change the boolean.
+If it happens again, return false.
+Consider the case that all the counts are even numbers.
+
+3)
+We can just check whether the count is even or odd, rather than literally count the number.
+
+
+
+
+5. One Away
+First, if the lengths differ more than two, return false.
+For insertion, compare each character from the beginning.
+If at some point they differ, just go to the next index for the string which has longer length.
+If they differ again afterward, return false.
+For removal, it returns the same result as insertion.
+For replacement, if the two differ, cause the lengths are the same, just go to the next indices for both strings.
+Therefore, if the lengths are the same, check whether it's replacement.
+And if the lengths differ by one, check whether it's insertion.
+
+We can merge the insertion check and replacement check, personal preference.
+
+
+
+
+6. String Compression
+Save the length of the original string.
+Make a buffer array which will contain the compressed string.
+Scanning the string, update the array.
+If the index exceeds the original length, return the original string.
+Or, we can check whether it would exceed or not first.
+
+
+
+
+7. Rotate Matrix
+Save the first row in a buffer array like, arr[0][0] ~ arr[0][n-2], except for the last element.
+Then, for the elements arr[n-1][0] ~ arr[1][0], move them to the empty space.
+After doing this three times so that only arr[0][0]~arr[0][n-2] hasn't been moved, put the buffered array to arr[0][n-1]~arr[n-2][n-1]
+
+
+
+
+
+8.
+Brute force: Seach the whole matrix and save the coordinates as pair.
+Then, scanning the pairs, zeros the matrix.
+Or, instead of saving by pairs, make two arrays which describe a row and column, and update the element.
+
+
+
+
+9.
+Pick one, and concatenate itself, and then call isSubstring.
+

@@ -1,0 +1,92 @@
+1. Remove Dups
+if buffer allowed: 
+Make another linked list for return.
+Following the linked list, check whether the node is in the new linked list, and if not add it at the tail. If yes, just skip to the next node.
+Or make a hashmap and add to hashmap.
+
+if buffer not allowed:
+From the head of the list, compare with the latter nodes and if there's any node that has the same value, remove it.
+This will take O(n^2) time.
+
+
+2. Return Kth to last
+We need two runners.
+Fast and slow.
+Proceed k-1 steps only for the fast runner.
+Then, proceed one by one for both runners.
+When fast runner reaches the end, return the slow runner.
+
+recursive solution.
+When a runner gets to the end in recursive way, return and add a counter by one for each recursion.
+When the counter becomes k, return the node.
+int function(node* cur, int k){
+	if(cur == null) return 0;
+
+	int idx = function(cur, k) + 1;
+	if(idx == k) cout << cur->value << endl;
+
+	return idx;
+}
+
+
+3. Delete Middle Node
+Replace the values of current node to the values of the next node.
+
+
+4. Partition
+Iterating through the linked list, if the node has lower value, add it to list A, higher value, to list B, same, to list C.
+Then merge A, C, B.
+
+
+5. Sum Lists
+We need a variable for the case when the sum of digits exceeds 10.
+From each head, sum the two and update the exceeded variable.
+After reaching the tail, if exceeded is true, add one more node.
+
+For followup.
+For the heads, sum it and if it exceeds 10, start with a node that has 1.
+And before adding a node, check the next nodes and check whether it exceeds 10.
+And so on.
+:::: Correction :::: 
+We have to check the number of digits first. 
+
+
+
+6. Palindrome
+Make an array that represents the linked list.
+Then check.
+
+Make a reversed linked list and compare.
+
+Use stack.
+Fast runner and slow runner needed.
+As slow runner runs, it pushes values to stack until the fast runner reaches the end.
+Then pops from the stack and compare with the last half nodes.
+
+
+
+7. Intersection
+Find the length gap.
+For the longer list, proceed by the length of gap first, and then start to run with the other list.
+Check whether the nexts of each path are the same.
+Be careful to compare with reference, not value.
+
+
+8. Loop Detection
+Slow runner and fast runner.
+Assume that there are k nodes from the head to the start of loop.
+After k steps, slow runner enters into the loop.
+Fast runner is k steps after slow runner.
+Assume loop size L.
+Fast runner is k%L steps after the intersection.
+Let k%L = t.
+Fast runner is t steps after the intersection, L-t steps before the intersection.
+Slow runner is at the intersection.
+From this moment, after L-t steps, the two runners collide.
+The collision spot will be L-t steps after the intersection.
+That is t steps before the intersection.
+k = n*L + t
+From this moment, after k steps, slow runner will be at the intersection.
+Therefore, we can make another slow runner and make it start from that moment.
+so that after k steps, the two slow runners meet at the intersection.
+

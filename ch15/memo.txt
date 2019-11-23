@@ -1,0 +1,61 @@
+1.
+Process:
+system resource와 independent한 개체이다.
+각각의 프로세스는 다른 address space에서 실행이 된다.
+한 프로세스에서 다른 프로세스의 데이터에 접근하려면 pipe, socket, file 등의 inter-process communication을 통해서만 접근할 수 있다.
+시스템콜이 프로세스 안에 포함된다.
+
+Thread:
+thread는 프로세스 안에 있으면서 heap을 포함한 프로세스의 자원을 공유한다.
+하나의 프로세스에 있는 여러개의 쓰레드는 같은 heap space를 공유할 것이다.
+이게 프로세스와의 차이인데 프로세스는 다른 프로세스가 쓰는 걸 접근할 수 없지만 쓰레드는 같은 프로세스의 쓰레드라면 그 쓰레드가 쓰는 자원을 같이 쓸 수 있다.
+//각 쓰레드는 각각의 register와 stack을 갖고 있지만 다른 쓰레드들은 heap memory에 읽고 쓸 수 있다??
+하나의 쓰레드가 프로세스의 자원 하나를 바꾸면 다른 쓰레드들도 그 변화를 같이 겪는다.
+쓰레드는 하나의 프로세스 안에만 소속돼야 한다.
+각각의 쓰레드에서 일어나는 명령은 스케쥴러가 다루는 가장 작은 명령 단위이다.
+시스템콜이 없다.
+
+차이(프로세스 기준).
+시스템콜이 있다.
+context switch가 필요하다.
+https://www.thecrazyprogrammer.com/2018/01/difference-process-thread.html
+
+
+
+3.
+deadlock이 생기는 이유: 왼쪽을 들고 오른쪽을 들어야 되는데 오른쪽이 없으면 계속 기다리게 되니까.
+solution 1: 왼쪽을 들고나서 오른쪽을 들려고 할 때 실패하면 왼쪽도 내려놓게 한다.
+solution 2: 
+
+
+
+
+5. call in order
+lock 대신 semaphore를 쓴다.
+lock은 lock ownership이라는 게 있다.
+
+semaphore: 
+공유된 자원의 데이터를 여러 프로세스가 접근하는 것을 막는다.
+리소스의 상태를 나타내는 카운터로 보면 된다.
+이 값에 따라서 프로레스가 그 자원을 쓸 수 있다 없다를 알 수 있다.
+재시도하기 전에 일정 시간을 기다려야 한다.
+
+mutex: 
+공유된 자원의 데이터를 여러 쓰레드가 접근하느 것을 막는다.
+critical section을 가진 쓰레드들의 running time이 서로 겹치지 않게 각각 단독으로 실행되게 하는 기술
+lock과 unlock을 사용한다.
+상태가 0, 1 두개 뿐인 binary semaphore라고도 볼 수 있다.
+mutex는 소유가 가능하며 소유주가 이에 대한 책임을 진다.
+
+mutex를 소유하고 있는 thread가 lock을 해제할 수 있다.
+semaphore는 소유하지 않는 thread가 semaphore를 해제할 수 있다.
+semaphore는 시스템 범위에 걸쳐 있고 파일시스템상의 파일 형태로 존재한다.
+mutex는 프로세스 범위이며 프로세스가 종료될 때 자동으로 clean up 된다.
+
+critical section: 여러 프로세스가 데이터를 공유하면서 수행될 때 각 프로세스에서 공유 데이터를 엑세스하는 프로그램 코드 부분
+
+
+
+
+7. FizzBuzz
+

@@ -1,0 +1,47 @@
+1. Three in One.
+If fixed size, just allocate total_size/3 to each stack.
+For flexible size, it's pretty complicated.
+For my solution, hmm.. one stack starts from the idx 0, another starts from the last idx.
+The other will be somewhere in middle of the two. blahblah.
+
+
+
+2. Stack Min
+Make an vector, and a min variable which is initialized to minus infinity.
+When pushing a value, compare with the min, and if the current value is not greater than min, push the value to the vector.
+That means that if there comes the same value, it is pushed, so that the same values are in the vector sequentially.
+When we need the min value, just return the back() of the vector.
+When pop from stack, if the popped value is the same with the vector.back(), pop for vector.
+
+
+3. Stack of Plates
+Just implement.
+
+
+4. Queue via Stacks
+Queue is first in first out. FIFO.
+A brute force method is just pile at stack, and when calling pop, reverse it to the other stack, and pop.
+An then if the next instruction is not pop, we should reverse it again.
+Or we can do a bit better.
+Once we reverse to the other stack, even if the next instruction is push, don't take them back.
+Instead, just push into the empty stack.
+And after several pops, when the reversed stack becomes empty, reverse the elments in being pushed stack. And so on.
+
+
+5. Sort Stack
+If we can use unlimited number of stacks, we can just implement merge sort.
+But if it's restricted to use only one additional stack:
+Assume that elements in the left stack are not sorted, and ones in the right sorted.
+If we are to pop an element from the left and insert it in the right position of the right stack,
+save the popped element in a variable, and move elements of the right stack to the left until it meets an element which is less than the saved variable.
+At that time, stop moving and push the saved value, and then move back to the right stack for the moved elements.
+N^2 time.
+
+
+
+6.Animal Sheleter
+Make two queues for each animal.
+For each element, save a timestamp.
+Done.
+
+
