@@ -1,0 +1,38 @@
+1. Arrays and Strings
+string 을 그냥 붙이는 건 time complexity가 든다. 그런데 python처럼 리스트 만들어서 join하는 건 괜찮을 듯?
+
+1-7
+N*N matrix에서 in-place로 90도 로테이션 시키기
+그냥 buffer 사용하면 N의 공간 필요 => 하나씩 하면 된다. constant니까. 
+시간 복잡도는 N제곱인데 이게 최선이다. N제곱의 element를 모두 touch하니까.
+
+
+
+
+
+
+
+2.
+
+
+
+3.
+
+
+
+4.
+
+
+
+5.
+
+
+
+6.
+
+
+
+7.
+
+
+
